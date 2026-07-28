@@ -1,12 +1,12 @@
-# Final Project: Interactive To Do List and Planner
+# Final Project: Interactive To-Do List and Planner
 
 ## Project Summary
-Interactive to do list and planner 
+Interactive to-do list and planner 
 
 ## Key features and functionality 
 
-Enter items on to do list
- - Includes and title, description, and due date on every to do list item
+Enter items on to-do list
+ - Includes title, description, and due date on every to-do list item
 
 Schedule when you plan to complete each item
  - Weekly schedule with planned dates and times of completion
