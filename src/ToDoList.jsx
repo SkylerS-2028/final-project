@@ -1,19 +1,39 @@
-import { useState } from 'react'
+import { useState } from 'react';
+import './ToDoList.css';
+
+/*
+Features to add:
+- Scheduling/ planner aspect
+- Hours of productivity 
+*/
 
 function ToDoList(){
+    
+    // Task information
     const [tasks, setTasks] = useState(
         {
-            title:[],
-            description:[], 
-            due:[],
+            title:["Final Project"],
+            description:["This is your opportunity to showcase what you’ve learned and to stretch your creativity and problem solving skills. Your project should reflect your understanding of modern JavaScript programming and its integration into the web development ecosystem."], 
+            due:["2026-7-31"],
+            hours:[0]
         }
     );
 
+    // New task information placeholders
     const [newTask, setNewTask] = useState ("");
     const [newDescr, setNewDescr] = useState("");
     const [newDue, setNewDue] = useState("");
 
+    // Productivity information
     const [completed, setCompleted] = useState(0);
+    //const [finishedHours, setFinishedHours] = useState(0);
+    //const [progressHours, setProgressHours] = useState(0);
+ 
+    // Functions
+        function changeHours(){
+            console.log(tasks);
+            setTasks()
+        }
 
         function addTask(){
             if(newTask.trim() !== "" && newDescr.trim() !== "" && newDue !== ""){
@@ -21,7 +41,8 @@ function ToDoList(){
                 setTasks(prev => ({
                     title: [...prev.title, newTask],
                     description: [...prev.description, newDescr],
-                    due:[...prev.description, newDue]
+                    due:[...prev.due, newDue],
+                    hours: [...prev.hours, 0]
                 }));
                 setNewTask("");
                 setNewDescr("");
@@ -59,9 +80,13 @@ function ToDoList(){
             setCompleted(completed + 1);
         }
 
+    // HTML
     return(  
-        <div>
-            <p>Completed Tasks: {completed}</p>
+        <div className = 'list-display' >
+            <div className='productivity-information'>
+                <p>Completed Tasks: {completed}</p>
+                <p>Total Hours: </p>
+            </div>
             <h1>List</h1>
 
             <div>
@@ -86,17 +111,27 @@ function ToDoList(){
                 onChange={(e) => setNewDue(e.target.value)}
                 />
 
-                <button onClick={addTask}>Add</button>
+                <button id="add-button" onClick={addTask}>Add</button>
             </div>
 
             <ol>
                 {tasks.title.map((task, index) => 
-                <li key={index}>
-                    <span>{task}</span>
-                    <span>{tasks.description[index]}</span>
-                    <span>{tasks.due[index]}</span>
-                    <button onClick={() => deleteItem(index)}>Delete</button>
-                    <button onClick={() => completeItem(index)}>Complete</button>
+                <li className='list-item' key={index}>
+                    <div className='task-content'>
+                        <p style={{ color: 'black', fontWeight: 'bold', paddingTop: '20px' }}>{task}</p>
+                        <p>{tasks.description[index]}</p>
+                        <p>Due: {tasks.due[index]}</p>
+                        <input
+                        type="number"
+                        placeholder="Current hours"
+                        id="hours"
+                        onChange={changeHours}
+                        />
+                    </div>
+                    <div className='remove-buttons'>
+                        <button id='delete-task' onClick={() => deleteItem(index)}>✗</button>
+                        <button id='complete-task' onClick={() => completeItem(index)}>✓</button>
+                    </div>
                 </li>)}
             </ol>
         </div>
