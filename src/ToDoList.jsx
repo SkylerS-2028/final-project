@@ -5,7 +5,6 @@ import './ToDoList.css';
 /*
 Features to add:
 - Scheduling/ planner aspect
-- Hours of productivity 
 */
 
 
@@ -17,7 +16,7 @@ function ToDoList(){
             title:["Final Project", "Sample Task"],
             description:["This is your opportunity to showcase what you’ve learned and to stretch your creativity and problem solving skills. Your project should reflect your understanding of modern JavaScript programming and its integration into the web development ecosystem.", "Sample task description"], 
             due:["2026-7-31", "2026-09-13"],
-            hours:[0]
+            hours:[0, 0]
         }
     );
 
@@ -26,25 +25,32 @@ function ToDoList(){
     const [newDescr, setNewDescr] = useState("");
     const [newDue, setNewDue] = useState("");
     const [newHour, setNewHour] = useState(0);
+    //const [noTasks, setNoTasks] = useState(false)
 
     // Productivity information
     const [completed, setCompleted] = useState(0);
-    //const [finishedHours, setFinishedHours] = useState(0);
-    //const [progressHours, setProgressHours] = useState(0);
+    const [finishedHours, setFinishedHours] = useState(0);
+    const [totalHours, setTotalHours] = useState(0);
  
     // Functions
     function changeHours(index){
-        if (newHour.trim() !== "" && newHour !== 0){
+        if (newHour !== "" && newHour !== 0){
             console.log(newHour);
             const updatedHours = [...tasks.hours];
-            updatedHours[index] = [newHour];
+            updatedHours[index] = Number(newHour);
             console.log(updatedHours);
             setTasks(prev => ({
                 ...prev,
                 hours: updatedHours,
             }))
+
+            let total = finishedHours;
+            for (let value of updatedHours){
+            total += value;
+            }
+            setTotalHours(total);
+            setNewHour(0)
         }
-        setNewHour(0)
     }
 
     function addTask(){
@@ -61,7 +67,8 @@ function ToDoList(){
             setNewDescr("");
             setNewDue("");
 
-            console.log(tasks)
+            console.log(tasks);
+            /*setNoTasks(false);*/
 
             }
     }
@@ -71,13 +78,18 @@ function ToDoList(){
         const updatedTasks = tasks.title.filter((element, i) => i !== index);
         const updatedDescription = tasks.description.filter((element, i) => i !== index);
         const updatedDates = tasks.due.filter((element, i) => i !== index);
+        const updatedHours = tasks.hours.filter((element, i) => i !== index);
 
         setTasks({
             title: updatedTasks,
             description: updatedDescription,
             due: updatedDates,
+            hours: updatedHours
         });
-
+        
+        /*if(tasks.title.length() === 0){
+            setNoTasks(true);
+        }*/
     }
 
     function completeItem(index){
@@ -85,14 +97,21 @@ function ToDoList(){
         const updatedTasks = tasks.title.filter((element, i) => i !== index);
         const updatedDescription = tasks.description.filter((element, i) => i !== index);
         const updatedDates = tasks.due.filter((element, i) => i !== index);
+        const updatedHours = tasks.hours.filter((element, i) => i !== index);
+
+        setFinishedHours(finishedHours + Number(tasks.hours[index]));
 
         setTasks({
             title: updatedTasks,
             description: updatedDescription,
             due: updatedDates,
+            hours: updatedHours
         });
 
         setCompleted(completed + 1);
+        /*if(tasks.title.length() === 0){
+            setNoTasks(true);
+        }*/
     }
 
     useEffect(() => {
@@ -104,7 +123,7 @@ function ToDoList(){
         <div className = 'list-display' >
             <div className='productivity-information'>
                 <p>Completed Tasks: {completed}</p>
-                <p>Total Hours: </p>
+                <p>Total Hours: {totalHours} </p>
             </div>
             <h1>List</h1>
 
@@ -134,6 +153,8 @@ function ToDoList(){
 
             </div>
 
+            <p>{/*noTasks ? "No tasks to complete!" : ""*/}</p>
+
             <ol>
                 {tasks.title.map((task, index) => 
 
@@ -146,9 +167,7 @@ function ToDoList(){
                         type="number"
                         placeholder="Current hours"
                         id="hours"
-                        onChange={(e) => { 
-                            setNewHour(e.target.value);
-                        }}
+                        onChange={(e) => setNewHour(e.target.value)}
                         />
                         <button onClick={() => changeHours(index)}>Update Hours</button>
                     </div>
