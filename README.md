@@ -1,7 +1,7 @@
 # Final Project: Interactive To-Do List and Planner
 
 ## Project Summary
-Interactive to-do list and planner 
+Interactive to-do list and planner
 
 ## Key features and functionality 
 
@@ -15,7 +15,16 @@ Count total hours of productivity
  - Mark how long you spent on an item and get a count of your total hours of productivity
 
 ## Instructions for use
-coming soon
+Enter a task title, description, and due date to add a task to your page. After clicking the add button, your new task will appear on your page, displaying all information about the task.
+
+On the top left of your page are a count of all completed tasks, and a count of total hours of productivity.
+
+You can keep track of the total hours spent on a task by entering your current hours spent in the "current hours" field of a task, and click update to merge it with your total productivity hours. 
+Note: enter total hours spent on the task, not hours added to the total of the task. 
+Example: if you had already spent 2 hours working on the task and updated those hours, if you later spent two more hours working on the task, write the total hours spent (four hours), not the hours spent in addition to those two hours(two hours).
+
+Click the red 'x' on the right corner of the task to delete the task. (Warning: Any hours spent on a deleted task will not be counted towards your total productivity.)
+Click the green checkmark on the right corner of the task to mark the task as completed. After doing so, your count of completed tasks will increase. Any hours spent working on a completed task will be included in total productivity hours. 
 
 ## Assignment details
 

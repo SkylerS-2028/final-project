@@ -67,7 +67,6 @@ function ToDoList(){
             setNewDescr("");
             setNewDue("");
 
-            console.log(tasks);
             /*setNoTasks(false);*/
 
             }
