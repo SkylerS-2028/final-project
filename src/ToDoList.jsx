@@ -2,20 +2,15 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import './ToDoList.css';
 
-/*
-Features to add:
-- Scheduling/ planner aspect
-*/
-
 function ToDoList(){
     
     // Task information
     const [tasks, setTasks] = useState(
         {
-            title:["Final Project", "Sample Task"],
-            description:["This is your opportunity to showcase what you’ve learned and to stretch your creativity and problem solving skills. Your project should reflect your understanding of modern JavaScript programming and its integration into the web development ecosystem.", "Sample task description"], 
-            due:["2026-7-31", "2026-09-13"],
-            hours:[0, 0]
+            title:["Make your first task!"],
+            description:["Welcome to your very own to-do list and planner! To make your first task, fill in the information above and click add! "], 
+            due:["N/A"],
+            hours:[0]
         }
     );
 
@@ -24,7 +19,7 @@ function ToDoList(){
     const [newDescr, setNewDescr] = useState("");
     const [newDue, setNewDue] = useState("");
     const [newHour, setNewHour] = useState(0);
-    //const [noTasks, setNoTasks] = useState(false) 
+    const [noTasks, setNoTasks] = useState(false) 
 
     // Productivity information
     const [completed, setCompleted] = useState(0);
@@ -33,7 +28,7 @@ function ToDoList(){
 
     // Planner useState
     const days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
-    const [showOptions, setShowOptions] = useState(true);
+    const [showOptions, setShowOptions] = useState(false);
     const [scheduled, setScheduled] = useState({
         monday:[],
         tuesday:[],
@@ -111,9 +106,9 @@ function ToDoList(){
         setTotalHours(total);
 
 
-        /*if(tasks.title.length() === 0){
+        if(updatedTasks.length === 0){
             setNoTasks(true);
-        }*/
+        }
     }
 
     function completeItem(index){
@@ -139,9 +134,10 @@ function ToDoList(){
         });
 
         setCompleted(completed + 1);
-        /*if(tasks.title.length() === 0){
+        
+        if(updatedTasks.length === 0){
             setNoTasks(true);
-        }*/
+        }
     }
 
     // Keeps track of task object in the console
@@ -156,7 +152,9 @@ function ToDoList(){
             [day]: checked
                 ? [...prev[day], task]
                 : prev[day].filter(checked => (checked !== task))
-            }))}
+        }))
+    }
+    
     
 
     // HTML
@@ -195,7 +193,7 @@ function ToDoList(){
 
             </div>
 
-            <p>{/*noTasks ? "No tasks to complete!" : ""*/}</p>
+            <p style={{ marginTop: '40px', }}>{noTasks ? "No tasks to complete!" : ""}</p>
 
             <ol>
                 {tasks.title.map((task, index) => 
@@ -225,6 +223,7 @@ function ToDoList(){
         <div className = 'planner-display'>
             <h1>Planner</h1>
             <button onClick={() => setShowOptions(!showOptions)}>{showOptions ? "Hide Scheduling Options" : "Show Scheduling Options"}</button>
+            <p style={{marginTop: '40px', }}>{noTasks ? "No tasks to schedule or complete!" : ""}</p>
                 <table>
                 <tr>
                     <th>Monday</th>
@@ -239,14 +238,14 @@ function ToDoList(){
                     {days.map((day, i) => 
                         <td key={i}>
                             {showOptions && (tasks.title.map((label, index) => 
-                                <label key={index}>
+                                <label className='task-check' key={index}>
                                     <input
                                         type="checkbox"
                                         value = {label}
                                         checked={scheduled[day].includes(label)}
                                         onChange={(e) => scheduleTask(day, label, e.target.checked)}
                                     />
-                                    {label} <br/>
+                                    <span>{label}<br/></span>
                                 </label>))}
                         </td>
                     )}

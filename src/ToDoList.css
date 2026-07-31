@@ -1,4 +1,5 @@
 /* Total Page */
+
 .total-content{
     margin: 0 auto;
     width: 90%;
@@ -93,6 +94,7 @@ input{
 }
 
 /* Calendar Table*/
+
 table {
     margin: 0 auto;
     flex: 1;
@@ -118,13 +120,23 @@ td{
 
 .schedule-options{
     font-size: 15px;
+    line-height: 1.8;
+}
+
+.task-check{
+    display: flex;
+    align-items: flex-start;
+}
+
+input[type="checkbox"]{
+    cursor: pointer;
 }
 
 .scheduled-list-item{
     list-style-type: none;
     text-align: center;
     background-color: gray;
-    color:black;
+    color:white;
     border-radius: 5px;
     font-weight: bold;
     margin-top: 5px;
