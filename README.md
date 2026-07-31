@@ -26,6 +26,9 @@ Example: if you had already spent 2 hours working on the task and updated those 
 Click the red 'x' on the right corner of the task to delete the task. (Warning: Any hours spent on a deleted task will not be counted towards your total productivity.)
 Click the green checkmark on the right corner of the task to mark the task as completed. After doing so, your count of completed tasks will increase. Any hours spent working on a completed task will be included in total productivity hours. 
 
+## Technologies used
+coming soon
+
 ## Assignment details
 
 This is your opportunity to showcase what you’ve learned and to stretch your creativity and problem solving skills. Your project should reflect your understanding of modern JavaScript programming and its integration into the web development ecosystem.
